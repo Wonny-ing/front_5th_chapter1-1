@@ -49,14 +49,14 @@
         <button>공유</button>
       </div>
     </div>
-  `,S=[{id:1,author:"홍길동",createdAt:"5분 전",content:"오늘 날씨가 정말 좋네요. 다들 좋은 하루 보내세요!"},{id:2,author:"김철수",createdAt:"15분 전",content:"새로운 프로젝트를 시작했어요. 열심히 코딩 중입니다!"},{id:3,author:"이영희",createdAt:"30분 전",content:"오늘 점심 메뉴 추천 받습니다. 뭐가 좋을까요?"},{id:4,author:"박민수",createdAt:"1시간 전",content:"주말에 등산 가실 분 계신가요? 함께 가요!"},{id:5,author:"정수연",createdAt:"2시간 전",content:"새로 나온 영화 재미있대요. 같이 보러 갈 사람?"}],P=()=>`
+  `,S=[{id:1,author:"홍길동",createdAt:"5분 전",content:"오늘 날씨가 정말 좋네요. 다들 좋은 하루 보내세요!"},{id:2,author:"김철수",createdAt:"15분 전",content:"새로운 프로젝트를 시작했어요. 열심히 코딩 중입니다!"},{id:3,author:"이영희",createdAt:"30분 전",content:"오늘 점심 메뉴 추천 받습니다. 뭐가 좋을까요?"},{id:4,author:"박민수",createdAt:"1시간 전",content:"주말에 등산 가실 분 계신가요? 함께 가요!"},{id:5,author:"정수연",createdAt:"2시간 전",content:"새로 나온 영화 재미있대요. 같이 보러 갈 사람?"}],$=()=>`
     <div class="space-y-4">
       ${S.map(t=>I(t)).join("")}
     </div>
-  `,$=()=>{const e=`
+  `,P=()=>{const e=`
     <main class="p-4">
       ${l.getState("isLoggedIn")?L():""}
-      ${P()}
+      ${$()}
     </main>
   `;return g(e)},E=()=>p(`
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
@@ -145,4 +145,4 @@
         홈으로 돌아가기
       </a>
     </div>
-  `),b=[{path:"/",component:$,requiresAuth:!1},{path:"/login",component:E,requiresAuth:!1},{path:"/profile",component:B,requiresAuth:!0}],u=document.getElementById("root"),c=()=>{const t=m(),e=l.getState("isLoggedIn");if(t==="/login"&&e){window.history.pushState({},"","/"),f("/");return}let o=b.find(a=>a.path===t);if(o&&o.requiresAuth&&!e){window.history.pushState({},"","/login"),f("/login");return}o?u.innerHTML=o.component():u.innerHTML=F(),h()},f=t=>{const e=b.find(o=>o.path===t);e&&(u.innerHTML=e.component(),h())},O=()=>{document.querySelectorAll("a").forEach(t=>{t.addEventListener("click",e=>{const o=t.getAttribute("href");!o||o.startsWith("http")||o.startsWith("#")||(e.preventDefault(),d(o))})})},d=t=>{t.startsWith("/")&&t.startsWith("/front_5th_chapter1-1"),window.history.pushState({},"",t),c()},H=()=>{O(),window.addEventListener("hashchange",c),c()},h=()=>{_(),q(),D()},_=()=>{const t=document.getElementById("login-form");t&&t.addEventListener("submit",e=>{e.preventDefault();const a={username:document.getElementById("username").value,email:"",bio:""};l.setState("isLoggedIn",!0),l.setState("user",a),d("/profile")})},q=()=>{const t=document.getElementById("logout");t&&t.addEventListener("click",e=>{e.preventDefault(),l.setState("isLoggedIn",!1),l.setState("user",null),d("/login")})},D=()=>{const t=document.getElementById("profile-form");t&&t.addEventListener("submit",e=>{e.preventDefault();const o=document.getElementById("username").value,a=document.getElementById("email").value,n=document.getElementById("bio").value,r={username:o,email:a,bio:n};l.setState("user",r),alert("프로필이 업데이트되었습니다.")})};l.subscribe("isLoggedIn",c);window.addEventListener("popstate",c);window.goTo=function(t){d(t)};H();
+  `),b=[{path:"/",component:P,requiresAuth:!1},{path:"/login",component:E,requiresAuth:!1},{path:"/profile",component:B,requiresAuth:!0}],u=document.getElementById("root"),c=()=>{const t=m(),e=l.getState("isLoggedIn");if(t==="/login"&&e){window.history.pushState({},"","/"),f("/");return}let o=b.find(a=>a.path===t);if(o&&o.requiresAuth&&!e){window.history.pushState({},"","/login"),f("/login");return}o?u.innerHTML=o.component():u.innerHTML=F(),h()},f=t=>{const e=b.find(o=>o.path===t);e&&(u.innerHTML=e.component(),h())},O=()=>{document.querySelectorAll("a").forEach(t=>{t.addEventListener("click",e=>{const o=t.getAttribute("href");!o||o.startsWith("http")||o.startsWith("#")||(e.preventDefault(),d(o))})})},d=t=>{const e="/front_5th_chapter1-1";let o=t;t.startsWith("/")&&!t.startsWith(e)&&(o=`${e}${t}`),window.history.pushState({},"",o),c()},H=()=>{O(),window.addEventListener("hashchange",c),c()},h=()=>{_(),q(),D()},_=()=>{const t=document.getElementById("login-form");t&&t.addEventListener("submit",e=>{e.preventDefault();const a={username:document.getElementById("username").value,email:"",bio:""};l.setState("isLoggedIn",!0),l.setState("user",a),d("/profile")})},q=()=>{const t=document.getElementById("logout");t&&t.addEventListener("click",e=>{e.preventDefault(),l.setState("isLoggedIn",!1),l.setState("user",null),d("/login")})},D=()=>{const t=document.getElementById("profile-form");t&&t.addEventListener("submit",e=>{e.preventDefault();const o=document.getElementById("username").value,a=document.getElementById("email").value,n=document.getElementById("bio").value,r={username:o,email:a,bio:n};l.setState("user",r),alert("프로필이 업데이트되었습니다.")})};l.subscribe("isLoggedIn",c);window.addEventListener("popstate",c);window.goTo=function(t){d(t)};H();
