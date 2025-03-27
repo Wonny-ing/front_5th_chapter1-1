@@ -1,4 +1,4 @@
-(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const o of document.querySelectorAll('link[rel="modulepreload"]'))a(o);new MutationObserver(o=>{for(const r of o)if(r.type==="childList")for(const s of r.addedNodes)s.tagName==="LINK"&&s.rel==="modulepreload"&&a(s)}).observe(document,{childList:!0,subtree:!0});function n(o){const r={};return o.integrity&&(r.integrity=o.integrity),o.referrerPolicy&&(r.referrerPolicy=o.referrerPolicy),o.crossOrigin==="use-credentials"?r.credentials="include":o.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function a(o){if(o.ep)return;o.ep=!0;const r=n(o);fetch(o.href,r)}})();function h(){const t={user:JSON.parse(localStorage.getItem("user"))||null,isLoggedIn:localStorage.getItem("isLoggedIn")==="true"},e={};function n(s){return t[s]}function a(s,i){if(t[s]=i,s==="user"){if(!i){localStorage.removeItem("user");return}localStorage.setItem("user",JSON.stringify(i))}s==="isLoggedIn"&&localStorage.setItem("isLoggedIn",i?"true":"false"),r(s)}function o(s,i){e[s]||(e[s]=[]),e[s].push(i)}function r(s){e[s]&&e[s].forEach(i=>i())}return{getState:n,setState:a,subscribe:o}}const l=h(),x=()=>{const t=l.getState("isLoggedIn"),e=window.location.pathname;return`
+(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const o of document.querySelectorAll('link[rel="modulepreload"]'))l(o);new MutationObserver(o=>{for(const r of o)if(r.type==="childList")for(const s of r.addedNodes)s.tagName==="LINK"&&s.rel==="modulepreload"&&l(s)}).observe(document,{childList:!0,subtree:!0});function n(o){const r={};return o.integrity&&(r.integrity=o.integrity),o.referrerPolicy&&(r.referrerPolicy=o.referrerPolicy),o.crossOrigin==="use-credentials"?r.credentials="include":o.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function l(o){if(o.ep)return;o.ep=!0;const r=n(o);fetch(o.href,r)}})();function h(){const t={user:JSON.parse(localStorage.getItem("user"))||null,isLoggedIn:localStorage.getItem("isLoggedIn")==="true"},e={};function n(s){return t[s]}function l(s,i){if(t[s]=i,s==="user"){if(!i){localStorage.removeItem("user");return}localStorage.setItem("user",JSON.stringify(i))}s==="isLoggedIn"&&localStorage.setItem("isLoggedIn",i?"true":"false"),r(s)}function o(s,i){e[s]||(e[s]=[]),e[s].push(i)}function r(s){e[s]&&e[s].forEach(i=>i())}return{getState:n,setState:l,subscribe:o}}const a=h(),x=()=>{const t=a.getState("isLoggedIn"),e=window.location.pathname;return`
     <header class="bg-blue-600 text-white p-4 sticky top-0">
       <h1 class="text-2xl font-bold">항해플러스</h1>
     </header>
@@ -16,7 +16,7 @@
     <footer class="bg-gray-200 p-4 text-center">
       <p>&copy; 2024 항해플러스. All rights reserved.</p>
     </footer>
-  `,m=t=>`
+  `,f=t=>`
     <div class="bg-gray-100 min-h-screen flex justify-center">
       <div class="max-w-md w-full">
         ${x()}
@@ -55,10 +55,10 @@
     </div>
   `,S=()=>{const e=`
     <main class="p-4">
-      ${l.getState("isLoggedIn")?y():""}
+      ${a.getState("isLoggedIn")?y():""}
       ${I()}
     </main>
-  `;return m(e)},E=()=>g(`
+  `;return f(e)},E=()=>g(`
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
       <h1 class="text-2xl font-bold text-center text-blue-600 mb-8">항해플러스</h1>
       <form id="login-form">
@@ -126,14 +126,14 @@
         프로필 업데이트
       </button>
     </form>
-  `,A=()=>{const t=l.getState("user"),e=`
+  `,A=()=>{const t=a.getState("user"),e=`
     <main class="p-4">
       <div class="bg-white p-8 rounded-lg shadow-md">
         <h2 class="text-2xl font-bold text-center text-blue-600 mb-8">내 프로필</h2>
         ${$(t)}
       </div>
     </main>
-  `;return m(e)},P=()=>g(`
+  `;return f(e)},P=()=>g(`
     <div class="bg-white p-8 rounded-lg shadow-md w-full text-center" style="max-width: 480px">
       <h1 class="text-2xl font-bold text-blue-600 mb-4">항해플러스</h1>
       <p class="text-4xl font-bold text-gray-800 mb-4">404</p>
@@ -145,4 +145,4 @@
         홈으로 돌아가기
       </a>
     </div>
-  `),B=()=>{const t=window.location.pathname,e=window.location.hash;return e.includes("#")?e.slice(1):t},p=[{path:"/front_5th_chapter1-1/",component:S,requiresAuth:!1},{path:"/front_5th_chapter1-1/login",component:E,requiresAuth:!1},{path:"/front_5th_chapter1-1/profile",component:A,requiresAuth:!0}],u=document.getElementById("root"),c=()=>{const t=B(),e=l.getState("isLoggedIn");if(t==="/login"&&e){window.history.pushState({},"","/"),f("/");return}let n=p.find(a=>a.path===t);if(n&&n.requiresAuth&&!e){window.history.pushState({},"","/login"),f("/login");return}n?u.innerHTML=n.component():u.innerHTML=P(),b()},f=t=>{const e=p.find(n=>n.path===t);e&&(u.innerHTML=e.component(),b())},F=()=>{document.querySelectorAll("a").forEach(t=>{t.addEventListener("click",e=>{const n=t.getAttribute("href");!n||n.startsWith("http")||n.startsWith("#")||(e.preventDefault(),d(n))})})},d=t=>{window.history.pushState({},"",t),c()},O=()=>{F(),window.addEventListener("hashchange",c),c()},b=()=>{q(),D(),H()},q=()=>{const t=document.getElementById("login-form");t&&t.addEventListener("submit",e=>{e.preventDefault();const a={username:document.getElementById("username").value,email:"",bio:""};l.setState("isLoggedIn",!0),l.setState("user",a),d("/profile")})},D=()=>{const t=document.getElementById("logout");t&&t.addEventListener("click",e=>{e.preventDefault(),l.setState("isLoggedIn",!1),l.setState("user",null),d("/login")})},H=()=>{const t=document.getElementById("profile-form");t&&t.addEventListener("submit",e=>{e.preventDefault();const n=document.getElementById("username").value,a=document.getElementById("email").value,o=document.getElementById("bio").value,r={username:n,email:a,bio:o};l.setState("user",r),alert("프로필이 업데이트되었습니다.")})};l.subscribe("isLoggedIn",c);window.addEventListener("popstate",c);window.goTo=function(t){d(t)};O();
+  `),B=()=>{const t=window.location.pathname,e=window.location.hash;return e.includes("#")?e.slice(1):t},p=[{path:"/",component:S,requiresAuth:!1},{path:"/login",component:E,requiresAuth:!1},{path:"/profile",component:A,requiresAuth:!0}],u=document.getElementById("root"),c=()=>{const t=B(),e=a.getState("isLoggedIn");if(t==="/login"&&e){window.history.pushState({},"","/"),m("/");return}let n=p.find(l=>l.path===t);if(n&&n.requiresAuth&&!e){window.history.pushState({},"","/login"),m("/login");return}n?u.innerHTML=n.component():u.innerHTML=P(),b()},m=t=>{const e=p.find(n=>n.path===t);e&&(u.innerHTML=e.component(),b())},F=()=>{document.querySelectorAll("a").forEach(t=>{t.addEventListener("click",e=>{const n=t.getAttribute("href");!n||n.startsWith("http")||n.startsWith("#")||(e.preventDefault(),d(n))})})},d=t=>{window.history.pushState({},"",t),c()},O=()=>{F(),window.addEventListener("hashchange",c),c()},b=()=>{q(),D(),H()},q=()=>{const t=document.getElementById("login-form");t&&t.addEventListener("submit",e=>{e.preventDefault();const l={username:document.getElementById("username").value,email:"",bio:""};a.setState("isLoggedIn",!0),a.setState("user",l),d("/profile")})},D=()=>{const t=document.getElementById("logout");t&&t.addEventListener("click",e=>{e.preventDefault(),a.setState("isLoggedIn",!1),a.setState("user",null),d("/login")})},H=()=>{const t=document.getElementById("profile-form");t&&t.addEventListener("submit",e=>{e.preventDefault();const n=document.getElementById("username").value,l=document.getElementById("email").value,o=document.getElementById("bio").value,r={username:n,email:l,bio:o};a.setState("user",r),alert("프로필이 업데이트되었습니다.")})};a.subscribe("isLoggedIn",c);window.addEventListener("popstate",c);window.goTo=function(t){d(t)};O();
